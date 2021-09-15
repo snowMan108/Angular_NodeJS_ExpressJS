@@ -32,20 +32,21 @@ exports.obtenerProducts = async (req, res) => {
 exports.actualizarProduct = async (req, res) => {
     try {
         const { nom, categoria, desc, idbar, preu } = req.body;
-        let Product = await Product.findById(req.params.id);
+        let actProd = new Product;
+        actPrd = await Product.findById(req.params.id);
 
-        if(!Product) {
+        if(!actPrd) {
             res.status(404).json({ msg: 'No existe el Producto'})
         }
 
-        Product.nom = nom;
-        Product.categoria = categoria;
-        Product.idbar = idbar;
-        Product.preu = preu;
-        Product.desc = desc;
+        actPrd.nom = nom;
+        actPrd.categoria = categoria;
+        actPrd.idbar = idbar;
+        actPrd.preu = preu;
+        actPrd.desc = desc;
 
-        Product = await Product.findOneAndUpdate({ _id:req.params.id},Product, { new:true })
-        res.json(Product)
+        actPrd = await Product.findOneAndUpdate({ _id:req.params.id},actPrd, { new:true })
+        res.json(actPrd)
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -54,11 +55,14 @@ exports.actualizarProduct = async (req, res) => {
 
 exports.obtenerProduct = async (req, res) => {
     try {
-        let Product = await Product.findById(req.params.id);
-        if(!Product) {
+        let nouPrd = new Product; 
+        nouPrd = await Product.findById(req.params.id);
+        if(!nouPrd) {
+            console.log(req);
             res.status(404).json({ msg: 'No existe el Product'})
+        } else {
+            res.json(nouPrd)
         }
-        res.json(Product)
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -67,8 +71,9 @@ exports.obtenerProduct = async (req, res) => {
 
 exports.eliminarProduct = async (req, res) => {
     try {
-        let Product = await Product.findById(req.params.id);
-        if(!Product) {
+        let elmPrd = new Product; 
+        elmPrd = await Product.findById(req.params.id);
+        if(!elmPrd) {
             res.status(404).json({ msg: 'No existe el Product'})
         }
         await Product.findOneAndRemove({ _id:req.params.id })
