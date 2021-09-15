@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+console.log("assd")
 const ProdSchema = mongoose.Schema({
     nom: {
         type: String,
@@ -21,4 +22,4 @@ const ProdSchema = mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Prod', ProdSchema);
+module.exports = mongoose.model('Product', ProdSchema);

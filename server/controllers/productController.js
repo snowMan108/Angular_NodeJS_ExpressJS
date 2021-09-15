@@ -1,11 +1,18 @@
-const Product = require("../models/product.model.js");
+const Product = require("../models/productModel.js");
+
+
+
 
 exports.crearProduct = async (req, res) => {
   try {
-      let Product;
-      Product = new Product(req.body);
-      await Product.save();
-      res.send(Product);
+      let product = new Product
+      product.nom = req.body.nom
+      product.categoria = req.body.categoria
+      product.desc = req.body.desc
+      product.preu = req.body.preu
+      product.idbar = req.body.idbar
+      await product.save();
+      res.send(product);
   } catch (error) {
       console.log(error);
       res.status(500).send('Hubo un error');
@@ -24,17 +31,18 @@ exports.obtenerProducts = async (req, res) => {
 
 exports.actualizarProduct = async (req, res) => {
     try {
-        const { nombre, categoria, ubicacion, precio } = req.body;
+        const { nom, categoria, desc, idbar, preu } = req.body;
         let Product = await Product.findById(req.params.id);
 
         if(!Product) {
-            res.status(404).json({ msg: 'No existe el Product'})
+            res.status(404).json({ msg: 'No existe el Producto'})
         }
 
-        Product.nombre = nombre;
+        Product.nom = nom;
         Product.categoria = categoria;
-        Product.ubicacion = ubicacion;
-        Product.precio = precio;
+        Product.idbar = idbar;
+        Product.preu = preu;
+        Product.desc = desc;
 
         Product = await Product.findOneAndUpdate({ _id:req.params.id},Product, { new:true })
         res.json(Product)
