@@ -1,4 +1,82 @@
 <p>product works!</p>
 <p>{{title}}<p>
-<p>Nom del prod {{nom}}<p>
+<p>Nom del prod {{nom}}
 <button (click)="getProduct()"></button>
+<br/>
+<div>
+    <p>Indica la ID del producto que quieras buscar</p>
+    <input type="button" (click)="getProduct(1)" value="Buscar"><input type="text" id="idToSearch">
+</div>
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{ title | uppercase }}</span>
+                     <form class="mt-3" [formGroup]="prodToCreate">
+                        <div class="mb-3">
+                            <input type="text" formControlName="nom"
+                                class="form-control form-control-lg" placeholder="Nom">
+                            <div class="text-danger" 
+                                *ngIf="prodToCreate.get('nom')?.hasError('required') && 
+                                       prodToCreate.get('nom')?.touched">
+                                <span>El nombre del producto <strong>es obligatorio</strong></span>
+                            </div> 
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="categoria"
+                                class="form-control form-control-lg" placeholder="Categoria">
+                            <div class="text-danger" 
+                                *ngIf="prodToCreate.get('categoria')?.hasError('required') && 
+                                       prodToCreate.get('categoria')?.touched">
+                                <span>La categoria <strong>es obligatoria</strong></span>
+                            </div> 
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="desc"
+                                class="form-control form-control-lg" placeholder="Desc">
+                            <div class="text-danger" 
+                                *ngIf="prodToCreate.get('desc')?.hasError('required') && 
+                                       prodToCreate.get('desc')?.touched">
+                                <span>La ubicación <strong>es obligatoria</strong></span>
+                            </div> 
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="idbar"
+                                class="form-control form-control-lg" placeholder="IDBar">
+                            <div class="text-danger" 
+                                *ngIf="prodToCreate.get('idbar')?.hasError('required') && 
+                                       prodToCreate.get('idbar')?.touched">
+                                <span>La ubicación <strong>es obligatoria</strong></span>
+                            </div> 
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" formControlName="preu"
+                                class="form-control form-control-lg" placeholder="Preu">
+                            <div class="text-danger" 
+                                *ngIf="prodToCreate.get('preu')?.hasError('required') && 
+                                       prodToCreate.get('preu')?.touched">
+                                <span>El precio <strong>es obligatorio</strong></span>
+                            </div> 
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="id"
+                                class="form-control form-control-lg" placeholder="ID">
+                            <div class="text-danger" 
+                                *ngIf="prodToCreate.get('id')?.hasError('required') && 
+                                       prodToCreate.get('id')?.touched">
+                                <span>El precio <strong>es obligatorio</strong></span>
+                            </div> 
+                        </div>
+                        <div class="mb3">
+                            <!-- <button routerLink="/" class="btn btn-secondary btn-lg float-start">VOLVER</button> -->
+                            <button type="" [disabled]="prodToCreate.invalid" class="btn btn-success btn-lg float-end">CREAR</button>
+                            <button type="" (click)="actProd()" [disabled]="prodToCreate.invalid" class="btn btn-success btn-lg float-end">ACTUALITZAR</button>
+
+                        </div>
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,13 @@
 export class Product {
-    _id?: number;
+    _id?: String;
     nom: string;
     categoria: string;
     desc: string;
     preu: number;
     idbar: number;
 
-    constructor( nom: string , categoria: string, desc: string, preu: number, idbar: number ){
-    
+    constructor( _id:String, nom: string , categoria: string, desc: string, preu: number, idbar: number ){
+        this._id = _id;
         this.nom = nom;
         this.categoria = categoria;
         this.desc = desc;
