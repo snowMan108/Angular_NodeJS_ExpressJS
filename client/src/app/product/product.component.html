@@ -70,8 +70,9 @@
                         </div>
                         <div class="mb3">
                             <!-- <button routerLink="/" class="btn btn-secondary btn-lg float-start">VOLVER</button> -->
-                            <button type="" [disabled]="prodToCreate.invalid" class="btn btn-success btn-lg float-end">CREAR</button>
+                            <button type="" (click)="creProd()" [disabled]="prodToCreate.invalid" class="btn btn-success btn-lg float-end">CREAR</button>
                             <button type="" (click)="actProd()" [disabled]="prodToCreate.invalid" class="btn btn-success btn-lg float-end">ACTUALITZAR</button>
+                            <button type="" (click)="delProd()" [disabled]="prodToCreate.invalid" class="btn btn-success btn-lg float-end">BORRAR</button>
 
                         </div>
                      </form>

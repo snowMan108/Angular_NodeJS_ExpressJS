@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Product } from './models/productModel';
 import { ProductService } from './services/productServices';
 
@@ -54,7 +55,29 @@ export class ProductComponent implements OnInit {
       }) 
     })
   }
+  delProd() {
+    this._productoService.eliminarProducts(this.prodToCreate.get('id')?.value).subscribe(data => {
+      this.toastr.info('El producto fue borrado con éxito!', 'Producto Borrado!');
+    }, error => {
+      console.log(error);
+    })
+  }
+  creProd() {
+    var newProd: Product = {
+      nom: this.prodToCreate.get('nom')?.value,
+      categoria: this.prodToCreate.get('categoria')?.value,
+      desc: this.prodToCreate.get('desc')?.value,
+      preu: this.prodToCreate.get('preu')?.value,
+      idbar: this.prodToCreate.get('idbar')?.value
+    }
+    this._productoService.guardarProducts(newProd).subscribe(data => {
+      this.toastr.info('El producto fue creado con éxito!', 'Producto Creado!');
+    }, error => {
+      console.log(error);
+    })
+  }
   actProd() {
+    console.log("asdsd");
     var edProd: Product = {
       nom: this.prodToCreate.get('nom')?.value,
       categoria: this.prodToCreate.get('categoria')?.value,
@@ -62,7 +85,12 @@ export class ProductComponent implements OnInit {
       preu: this.prodToCreate.get('preu')?.value,
       idbar: this.prodToCreate.get('idbar')?.value
     }
-      this._productoService.editarProduct(this.id,edProd)
+    console.log(edProd);
+      this._productoService.editarProduct(this.id,edProd).subscribe(data => {
+        this.toastr.info('El producto fue actualizado con éxito!', 'Producto Actualizado!');
+      }, error => {
+        console.log(error);
+      })
   }
 }
 
