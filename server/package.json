@@ -8,7 +8,9 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^6.0.5"
+    "mongoose": "^6.0.5",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

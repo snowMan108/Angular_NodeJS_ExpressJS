@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-console.log("assd")
 const ProdSchema = mongoose.Schema({
     nom: {
         type: String,

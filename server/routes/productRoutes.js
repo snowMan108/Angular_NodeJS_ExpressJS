@@ -1,5 +1,4 @@
 const express = require('express');
-console.log("entra routes");
 const router = express.Router();
 const productController = require('../controllers/productController.js');
 
