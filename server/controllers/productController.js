@@ -3,49 +3,51 @@ const Product = require("../models/productModel.js");
 
 
 
-exports.crearProduct = async (req, res) => {
-  try {
-      let product = new Product
-      product.nom = req.body.nom
-      product.categoria = req.body.categoria
-      product.desc = req.body.desc
-      product.preu = req.body.preu
-      product.idbar = req.body.idbar
-      await product.save();
-      res.send(product);
-  } catch (error) {
-      console.log(error);
-      res.status(500).send('Hubo un error');
-  }
-}
-
-exports.obtenerProducts = async (req, res) => {
+exports.crearProduct = async(req, res) => {
     try {
-        const Products = await Product.find();
-        res.json(Products) 
+        let product = new Product;
+        product.nom = req.body.nom;
+        product.id_bar = req.body.id_bar;
+        product.descr = req.body.descr;
+        product.id_cat = req.body.id_cat;
+        product.preu = req.body.preu;
+        product.stock = req.body.stock;
+        await product.save();
+        res.send(product);
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
     }
 }
 
-exports.actualizarProduct = async (req, res) => {
+exports.obtenerProducts = async(req, res) => {
     try {
-        const { nom, categoria, desc, idbar, preu } = req.body;
-        let actProd = new Product;
+        const Products = await Product.find();
+        res.json(Products)
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
+exports.actualizarProduct = async(req, res) => {
+    try {
+        const { nom, id_bar, descr, id_cat, preu, stock } = req.body;
+        let actPrd = new Product;
         actPrd = await Product.findById(req.params.id);
 
-        if(!actPrd) {
-            res.status(404).json({ msg: 'No existe el Producto'})
+        if (!actPrd) {
+            res.status(404).json({ msg: 'No existe el Producto' })
         }
 
         actPrd.nom = nom;
-        actPrd.categoria = categoria;
-        actPrd.idbar = idbar;
+        actPrd.id_bar = id_bar;
+        actPrd.descr = descr;
+        actPrd.id_cat = id_cat;
         actPrd.preu = preu;
-        actPrd.desc = desc;
+        actPrd.stock = stock;
 
-        actPrd = await Product.findOneAndUpdate({ _id:req.params.id},actPrd, { new:true })
+        actPrd = await Product.findOneAndUpdate({ _id: req.params.id }, actPrd, { new: true })
         res.json(actPrd)
     } catch (error) {
         console.log(error);
@@ -53,13 +55,13 @@ exports.actualizarProduct = async (req, res) => {
     }
 }
 
-exports.obtenerProduct = async (req, res) => {
+exports.obtenerProduct = async(req, res) => {
     try {
-        let nouPrd = new Product; 
+        let nouPrd = new Product;
         nouPrd = await Product.findById(req.params.id);
-        if(!nouPrd) {
+        if (!nouPrd) {
             console.log(req);
-            res.status(404).json({ msg: 'No existe el Product'})
+            res.status(404).json({ msg: 'No existe el Product' })
         } else {
             res.json(nouPrd)
         }
@@ -69,14 +71,14 @@ exports.obtenerProduct = async (req, res) => {
     }
 }
 
-exports.eliminarProduct = async (req, res) => {
+exports.eliminarProduct = async(req, res) => {
     try {
-        let elmPrd = new Product; 
+        let elmPrd = new Product;
         elmPrd = await Product.findById(req.params.id);
-        if(!elmPrd) {
-            res.status(404).json({ msg: 'No existe el Product'})
+        if (!elmPrd) {
+            res.status(404).json({ msg: 'No existe el Product' })
         }
-        await Product.findOneAndRemove({ _id:req.params.id })
+        await Product.findOneAndRemove({ _id: req.params.id })
         res.json({ msg: 'Product eliminado con éxito!' })
     } catch (error) {
         console.log(error);

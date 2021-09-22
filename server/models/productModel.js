@@ -4,7 +4,15 @@ const ProdSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    categoria: {
+    id_bar: {
+        type: String,
+        required: true,
+    },
+    descr: {
+        type: String,
+        required: true,
+    },
+    id_cat: {
         type: String,
         required: true,
     },
@@ -12,9 +20,8 @@ const ProdSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    desc: String,
-    idbar: {
-        type: Number,
+    stock: {
+        type: Boolean,
         required: true,
     }
 }, {
