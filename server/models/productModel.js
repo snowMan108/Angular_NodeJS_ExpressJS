@@ -23,6 +23,10 @@ const ProdSchema = mongoose.Schema({
     stock: {
         type: Boolean,
         required: true,
+    },
+    foto: {
+        type: String,
+        required: false,
     }
 }, {
     timestamps: true

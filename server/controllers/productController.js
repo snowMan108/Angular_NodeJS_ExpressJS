@@ -12,6 +12,7 @@ exports.crearProduct = async(req, res) => {
         product.id_cat = req.body.id_cat;
         product.preu = req.body.preu;
         product.stock = req.body.stock;
+        product.foto = req.body.foto;
         await product.save();
         res.send(product);
     } catch (error) {
@@ -32,7 +33,7 @@ exports.obtenerProducts = async(req, res) => {
 
 exports.actualizarProduct = async(req, res) => {
     try {
-        const { nom, id_bar, descr, id_cat, preu, stock } = req.body;
+        const { nom, id_bar, descr, id_cat, preu, stock, foto } = req.body;
         let actPrd = new Product;
         actPrd = await Product.findById(req.params.id);
 
@@ -46,6 +47,7 @@ exports.actualizarProduct = async(req, res) => {
         actPrd.id_cat = id_cat;
         actPrd.preu = preu;
         actPrd.stock = stock;
+        actPrd.foto = foto;
 
         actPrd = await Product.findOneAndUpdate({ _id: req.params.id }, actPrd, { new: true })
         res.json(actPrd)
@@ -63,7 +65,7 @@ exports.obtenerProduct = async(req, res) => {
             console.log(req);
             res.status(404).json({ msg: 'No existe el Product' })
         } else {
-            res.json(nouPrd)
+            res.json(nouPrd);
         }
     } catch (error) {
         console.log(error);
