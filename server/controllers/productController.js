@@ -22,8 +22,8 @@ exports.crearProduct = async(req, res) => {
 
 exports.obtenerProducts = async(req, res) => {
     try {
-        const Products = await Product.find();
-        res.json(Products)
+        const Products = await Product.find({ "id_bar": req.params.id_bar });
+        res.json(Products);
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');

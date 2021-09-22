@@ -5,9 +5,9 @@ const categoController = require('../controllers/categoController.js');
 
 //api/productos
 router.post('/', productController.crearProduct);
-router.get('/', productController.obtenerProducts);
+router.get('/:id_bar', productController.obtenerProducts);
 router.put('/:id', productController.actualizarProduct);
-router.get('/:id', productController.obtenerProduct);
+router.get('/prod/:id', productController.obtenerProduct);
 router.delete('/:id', productController.eliminarProduct);
 
 //rutas categorias
