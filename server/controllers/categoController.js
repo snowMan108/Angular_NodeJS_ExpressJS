@@ -40,7 +40,21 @@ exports.getAllCategoProds = async(req, res) => {
 
 exports.updateCatego = async(req, res) => {
     try {
+        const { id_bar, nom, descr, foto } = req.body;
+        let actCatego = new Catego;
+        actCatego = await Catego.findById(req.params.id_catego);
 
+        if (!actCatego) {
+            res.status(404).json({ msg: 'No existe la categoria' })
+        }
+
+        actCatego.id_bar = id_bar;
+        actCatego.nom = nom;
+        actCatego.descr = descr;
+        actCatego.foto = foto;
+
+        actCatego = await Catego.findOneAndUpdate({ _id: req.params.id_catego }, actCatego, { new: true });
+        res.json(actCatego);
     } catch (error) {
         console.log(error);
         res.status(500).send('Hobo un error');
@@ -49,7 +63,13 @@ exports.updateCatego = async(req, res) => {
 
 exports.deleteCatego = async(req, res) => {
     try {
-
+        let delCatego = new Catego;
+        delCatego = await Catego.findById(req.params.id_catego);
+        if (!delCatego) {
+            res.status(404).json({ msg: 'No existe la categoria' });
+        }
+        await Catego.findOneAndRemove({ _id: req.params.id_catego });
+        res.json({ msg: 'Categoria eliminada con éxito!' });
     } catch (error) {
         console.log(error);
         res.status(500).send('Hobo un error');
