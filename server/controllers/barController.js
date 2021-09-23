@@ -17,8 +17,12 @@ module.exports = {
             }).then(bar => res.status(200).send(bar))
             .catch(error => res.status(400).send(error));
     },
-    getBarInfo(req, res) {
+    getBars(req, res) {
+        return Bar.findAll({
+            where: {
 
+            }
+        });
     },
     updateBarInfo(req, res) {
 
