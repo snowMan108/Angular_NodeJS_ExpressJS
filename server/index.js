@@ -1,19 +1,19 @@
 const express = require('express');
 const conectarDB = require('./config/db');
 const cors = require("cors");
+const morgan = require('morgan')
 const productRouting = require('./routes/productRoutes');
 const userRouting = require('./routes/userRoutes');
 const barRouting = require('./routes/barRoutes');
 
 const app = express();
-
 conectarDB();
 
 //app.set ('port', process.env.PORT || 4000)
 const port = process.env.PORT || 4000
 
 app.use(cors())
-
+app.use(morgan('dev'))
 app.use(express.json());
 
 app.use('/api/products', productRouting);
