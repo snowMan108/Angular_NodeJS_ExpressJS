@@ -9,21 +9,20 @@ import { Product } from './models/productModel';
 })
 export class ProductCreateComponent implements OnInit {
     constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private cd: ChangeDetectorRef,
-      private prodToCreate: FormGroup,
-      private fb: FormBuilder
+      // private route: ActivatedRoute,
+      // private router: Router,
+      // private cd: ChangeDetectorRef,
+      // private prodToCreate: FormGroup,
+      // private fb: FormBuilder
       ) {
-        this.prodToCreate = this.fb.group({
-          id: [''],
-          nom: ['', Validators.required],
-          categoria:['', Validators.required],
-          descr:['', Validators.maxLength(1000)],
-          preu:['', Validators.required],
-          id_bar:['', Validators.required],
-  
-        })
+        // this.prodToCreate = this.fb.group({
+        //   id: [''],
+        //   nom: ['', Validators.required],
+        //   categoria:['', Validators.required],
+        //   descr:['', Validators.maxLength(1000)],
+        //   preu:['', Validators.required],
+        //   id_bar:['', Validators.required],
+        // })
      }
 
   // descr: {
@@ -45,5 +44,5 @@ export class ProductCreateComponent implements OnInit {
     ngOnInit() {
       console.log("asdasdzz");
     }
-  
+
   }

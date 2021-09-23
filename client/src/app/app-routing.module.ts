@@ -5,18 +5,18 @@ console.log("approutingmodule");
 import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
 
 const routes: Routes = [
-  // { 
+  // {
   //   path: 'product',
-  //   component: ProductComponent 
+  //   component: ProductComponent
   // },
-  // { 
-  //   path: 'product/:id',
-  //   component: ProductComponent 
-  // }
-    {
-      path: 'product',
-      loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
-    }
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'product',
+    loadChildren: () => import('./shared/product/product.module').then(m => m.ProductModule)
+  }
 ];
 
 @NgModule({
@@ -25,7 +25,7 @@ const routes: Routes = [
       // preloadingStrategy: QuicklinkStrategy,
       relativeLinkResolution: 'legacy'
     })
-  
+
   ],
   exports: [RouterModule]
 })
