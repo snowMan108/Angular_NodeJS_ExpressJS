@@ -19,5 +19,5 @@ app.use('/api/products', productRouting);
 app.use('/api/user', userRouting);
 
 app.listen(port, '0.0.0.0', () => { //app.get('port')
-    console.log(`El servidor está corriendo perfectamente en el puerto ${port}`)
+    console.log(`El servidor está corriendo perfectamente en el puerto https://localhost:${port}`)
 })
