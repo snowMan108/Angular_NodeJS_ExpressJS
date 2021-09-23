@@ -3,6 +3,7 @@ const conectarDB = require('./config/db');
 const cors = require("cors");
 const productRouting = require('./routes/productRoutes');
 const userRouting = require('./routes/userRoutes');
+const barRouting = require('./routes/barRoutes');
 
 const app = express();
 
