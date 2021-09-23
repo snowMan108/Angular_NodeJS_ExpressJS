@@ -1,19 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { LucideAngularModule } from 'lucide-angular';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeListComponent } from './home-list-bar.component';
-
+import { HomeSearchComponent } from './home-search-bar.component';
+import {
+  Star,
+  ClipboardList,
+  QrCode,
+  Search,
+  Tag
+} from 'lucide-angular'
 @NgModule({
   declarations: [
-    HomeListComponent
+    HomeListComponent,
+    HomeSearchComponent
   ],
   exports: [
-    HomeListComponent
+    HomeListComponent,
+    HomeSearchComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    LucideAngularModule.pick({
+      Star,
+      ClipboardList,
+      QrCode,
+      Search,
+      Tag
+    })
   ]
 })
 export class HomeModule { }

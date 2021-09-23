@@ -14,11 +14,13 @@ import { HomeComponent } from './home/home.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
-    HomeComponent
+    HomeComponent,
+
   ],
   imports: [
     HomeModule,
@@ -29,7 +31,6 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

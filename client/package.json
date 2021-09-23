@@ -21,6 +21,7 @@
     "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.1",
     "jquery": "^3.6.0",
+    "lucide-angular": "^0.16.0",
     "ngx-quicklink": "^0.2.7",
     "ngx-toastr": "^14.1.3",
     "rxjs": "~6.6.0",

@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+*{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+a{
+  text-decoration: none;
+}
+html,
+body{
+  background: #5B5B5C;
+  height: 100%;
+  font-family: 'Montserrat','Arial',sans-serif;
+  color: #636363;
+}
+
+.card-body h1{
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  margin-bottom: 8px;
+  color: #636363;
+
+}
+
+
+.featured-listings{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* // RESTAURANT CARD LISTING ITEM */
+
+.restaurant-card{
+  background: #fff;
+  width: 320px;
+  height: 300px;
+  border-radius: 10px;
+  text-align: center;
+  -webkit-box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
+  -moz-box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
+  box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
+  overflow: hidden;
+}
+
+.card-header{
+  height: 50%;
+  background: #000 url(http://res.cloudinary.com/jenelle-miller/image/upload/v1518632582/tupelo-cafe_a7buc9.png) center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.favorite-btn{
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  border-radius: 50%;
+  position: relative;
+  top: 124px;
+  left: 24px;
+  border: 2px solid #fff;
+  background: #F22F59;
+  padding-top: 15px;
+  text-align: center;
+  vertical-align: center;
+  transition: .3s;
+}
+
+.card-body{
+  padding: 24px;
+  font-family: 'Lato','Arial',sans-serif;
+  font-size: .9rem;
+
+}
+
+.rating ul{
+  padding: 10px;
+}
+.rating li{
+  display: inline;
+  color: #EFA127;
+}
