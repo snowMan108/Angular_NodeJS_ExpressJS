@@ -12,8 +12,11 @@ export class BarService {
     private apiService: ApiService
   ) {}
 
-  getAll(): Observable<[string]> {
+  getAll(): Observable<any> {
           return this.apiService.get('products/categories/id1')
+          // .pipe(map(data => {
+          //   console.log(data);
+          //   data.bars}));
   }
 
 }
