@@ -78,3 +78,5 @@ typings/
 /server/config/config.json
 
 *.env
+*.png
+*.svg
