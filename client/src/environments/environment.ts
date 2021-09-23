@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url:'http://localhost:4000/api/'
+  api_url:'http://localhost:4000/api/'
 
 };
 // This file can be replaced during build by using the `fileReplacements` array.

@@ -9,7 +9,8 @@ import {
   ClipboardList,
   QrCode,
   Search,
-  Tag
+  Tag,
+  Map
 } from 'lucide-angular'
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {
       ClipboardList,
       QrCode,
       Search,
-      Tag
+      Tag,
+      Map
     })
   ]
 })
