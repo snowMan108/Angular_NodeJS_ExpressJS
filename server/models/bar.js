@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         nom: DataTypes.STRING,
         descr: DataTypes.STRING,
         direcc: DataTypes.STRING,
+        city: DataTypes.STRING,
         coords: DataTypes.STRING,
         horari: DataTypes.STRING,
         owner: DataTypes.STRING

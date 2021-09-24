@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { op } = require('sequelize');
 const Bar = require('../models').bar;
 const { generateId } = require('../utils/generateIds');
 
@@ -9,6 +9,7 @@ module.exports = {
                 nom: req.body.nom,
                 descr: req.body.descr,
                 direcc: req.body.descr,
+                city: req.body.city,
                 coords: req.body.coords,
                 horari: req.body.horari,
                 owner: req.body.owner,
@@ -20,7 +21,7 @@ module.exports = {
     getBars(req, res) {
         return Bar.findAll({
             where: {
-
+                [op.like]: req.params.id_catego,
             }
         });
     },

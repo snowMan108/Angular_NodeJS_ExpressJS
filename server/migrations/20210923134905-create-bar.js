@@ -16,6 +16,9 @@ module.exports = {
             direcc: {
                 type: Sequelize.STRING
             },
+            city: {
+                type: Sequelize.STRING
+            },
             coords: {
                 type: Sequelize.STRING
             },
