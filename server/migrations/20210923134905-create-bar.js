@@ -10,6 +10,9 @@ module.exports = {
             nom: {
                 type: Sequelize.STRING
             },
+            slug: {
+                type: Sequelize.STRING
+            },
             descr: {
                 type: Sequelize.STRING
             },

@@ -2,6 +2,9 @@
 const {
     Model
 } = require('sequelize');
+
+const SequelizeSlugify = require('sequelize-slugify');
+
 module.exports = (sequelize, DataTypes) => {
     class bar extends Model {
         /**
@@ -19,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         nom: DataTypes.STRING,
+        slug: {
+            type: DataTypes.STRING,
+            unique: true
+        },
         descr: DataTypes.STRING,
         direcc: DataTypes.STRING,
         city: DataTypes.STRING,
@@ -29,5 +36,8 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         modelName: 'bar',
     });
+
+    SequelizeSlugify.slugifyModel(bar, { source: ['nom'], slugOptions: { lower: true } });
+
     return bar;
 };
