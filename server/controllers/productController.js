@@ -17,7 +17,7 @@ exports.crearProduct = async(req, res) => {
         res.send(product);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -27,7 +27,7 @@ exports.obtenerProducts = async(req, res) => {
         res.json(Products);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -53,7 +53,7 @@ exports.actualizarProduct = async(req, res) => {
         res.json(actPrd)
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -69,7 +69,7 @@ exports.obtenerProduct = async(req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -84,6 +84,6 @@ exports.eliminarProduct = async(req, res) => {
         res.json({ msg: 'Product eliminado con éxito!' })
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }

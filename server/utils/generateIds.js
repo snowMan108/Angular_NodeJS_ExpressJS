@@ -6,5 +6,6 @@ module.exports.generateId = () => {
     var datetime = new Date();
     var id = datetime.getTime() + (Math.random() * Math.pow(36, 6) | 0).toString(36);
     var hashDigest = sha256(id);
-    return base64.stringify(hmacSHA512(hashDigest, "mySecret"));
+    var myid = hmacSHA512(hashDigest, "mySecret").toString();
+    return myid;
 }

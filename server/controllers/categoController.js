@@ -14,7 +14,7 @@ exports.createCatego = async(req, res) => {
         res.send(catego);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -24,7 +24,7 @@ exports.getBarCatego = async(req, res) => {
         res.json(Categos);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -34,7 +34,7 @@ exports.getAllCategoProds = async(req, res) => {
         res.json(Products);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hobo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -57,7 +57,7 @@ exports.updateCatego = async(req, res) => {
         res.json(actCatego);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hobo un error');
+        res.status(500).send('ERROR 500');
     }
 }
 
@@ -72,6 +72,6 @@ exports.deleteCatego = async(req, res) => {
         res.json({ msg: 'Categoria eliminada con éxito!' });
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hobo un error');
+        res.status(500).send('ERROR 500');
     }
 }
