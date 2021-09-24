@@ -16,9 +16,7 @@
                 </div>
                 <input type="search" style="border-radius: 24px;" list="datalistOptions" id="exampleDataList" placeholder="Categories" aria-describedby="button-addon2" class="form-control border-0 bg-light">
                 <datalist id="datalistOptions">
-                  <option value="Catego 1">
-                  <option value="Catego 2">
-                  <option value="Catego 3">
+                  <option *ngFor="let item of arrCatego" value="{{item.nom}}">
                 </datalist>
               <!-- </div> -->
             </div>

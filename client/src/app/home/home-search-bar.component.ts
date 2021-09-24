@@ -2,12 +2,14 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterVie
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BarService } from '../core/services';
+import { Categorie } from '../core/models/categories.model';
 @Component({
   selector: 'home-search-bar',
   templateUrl: './home-search-bar.component.html',
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
+    arrCatego!: [Categorie];
     constructor(
       private cd: ChangeDetectorRef,
 
@@ -16,9 +18,13 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
     ) {}
 
     ngAfterViewInit() {
-      this.BarService.getAll().subscribe((bars) => {
+      this.BarService.getAllFrom("id1").subscribe((bars) => {
         this.arrBars = bars
         console.log(this.arrBars);
+      })
+      this.BarService.getAllCategories().subscribe((categos) => {
+        this.arrCatego = categos
+        console.log(this.arrCatego)
       })
     }
     ngOnInit() {

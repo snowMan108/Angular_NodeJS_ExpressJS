@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Product } from './models/productModel';
-// import { ProductService } from './services/productServices';
 
 @Component({
   selector: 'app-product',
