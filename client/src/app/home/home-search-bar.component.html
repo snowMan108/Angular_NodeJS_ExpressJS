@@ -1,4 +1,5 @@
-<div class="" style="background-image: url('https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg'); background-position: 100%; background-size: 100%;">
+<div class=""
+  style="background-image: url('https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg'); background-position: 100%; background-size: 100%;">
   <div class="row">
 
     <div class="col mx-auto">
@@ -6,40 +7,87 @@
       <div style="text-align: center; margin-top: 5%;">
         <img src="https://i.ibb.co/6wtNQhn/logo-large.png" alt="logo-large" border="0">
       </div>
-        <div style="padding: 5%;" class="rounded shadow">
+      <div style="padding: 5%;" class="rounded shadow">
         <form action="" class="form-group row">
           <!-- <div class="p-1 bg-light rounded rounded-pill shadow-sm col-md-4"> -->
-            <div class="p-1 bg-light rounded rounded-pill offset-md-1 shadow-sm mb-4 col-md-2">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"><lucide-icon name="tag"></lucide-icon></i></button>
-                </div>
-                <input type="search" style="border-radius: 24px;" list="datalistOptions" id="exampleDataList" placeholder="Categories" aria-describedby="button-addon2" class="form-control border-0 bg-light">
-                <datalist id="datalistOptions">
-                  <option *ngFor="let item of arrCatego" value="{{item.nom}}">
-                </datalist>
+          <div class="p-1 bg-light rounded rounded-pill offset-md-1 shadow-sm mb-4 col-md-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button id="button-addon2" type="" class="btn btn-link text-warning"><i class="fa fa-search">
+                    <lucide-icon name="tag"></lucide-icon>
+                  </i></button>
+              </div>
+              <input type="search" style="border-radius: 24px;" list="datalistOptions" #inputCat id="inputCat"
+                placeholder="Categories" aria-describedby="button-addon2" (keyup)="getBars()"
+                class="form-control border-0 bg-light">
+              <datalist id="datalistOptions">
+                <option *ngFor="let item of arrCatego" value="{{item.nom}}">
+              </datalist>
               <!-- </div> -->
             </div>
           </div>
           <div class="p-1 bg-light rounded rounded-pill offset-md-1 shadow-sm mb-4 col-md-4">
             <div class="input-group">
               <div class="input-group-prepend">
-                <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"><lucide-icon name="search"></lucide-icon></i></button>
+                <button id="button-addon2" type="" class="btn btn-link text-warning"><i class="fa fa-search">
+                    <lucide-icon name="search"></lucide-icon>
+                  </i></button>
               </div>
-              <input type="search" style="border-radius: 24px;" placeholder="What're you searching for?" aria-describedby="button-addon2" class="form-control border-0 bg-light">
+              <input type="search" id="inputNom" #inputNom (keyup)="getBars()" style="border-radius: 24px;"
+                placeholder="What're you searching for?" aria-describedby="button-addon2"
+                class="form-control border-0 bg-light">
             </div>
           </div>
           <div class="p-1 bg-light rounded rounded-pill offset-md-1 shadow-sm mb-4 col-md-2">
             <div class="input-group">
               <div class="input-group-prepend">
-                <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"><lucide-icon name="map"></lucide-icon></i></button>
+                <button id="button-addon2" type="" class="btn btn-link text-warning"><i class="fa fa-search">
+                    <lucide-icon name="map"></lucide-icon>
+                  </i></button>
               </div>
-              <input type="search" style="border-radius: 24px;" placeholder="Location" aria-describedby="button-addon2" class="form-control border-0 bg-light">
+              <input (keyup)="getBars()" id="inputCiutat" #inputCiutat type="search" style="border-radius: 24px;"
+                placeholder="Location" aria-describedby="button-addon2" class="form-control border-0 bg-light">
             </div>
           </div>
-
         </form>
       </div>
     </div>
   </div>
+</div>
+
+<div style="justify-content: space-evenly;" class="featured-listings">
+<home-list-bar *ngFor="let item of arrBars" [bar]="item" ></home-list-bar>
+  <!-- <div class="restaurant-card" *ngFor="let item of arrBars">
+    <div class="card-header">
+      <div class="favorite-btn">
+        <i class="fas fa-heart"></i>
+      </div>
+    </div>
+    <div class="card-body">
+      <h1><a href="#">{{item.nom}}</a></h1>
+      <p>{{item.direcc}}</p>
+      <p>{{item.descr}}</p>
+      <p>{{item.horari}}</p>
+      <div class="rating">
+        <ul>
+          <li><i>
+              <lucide-icon name="star" class="starfull"></lucide-icon>
+            </i></li>
+          <li><i>
+              <lucide-icon name="star" class="starfull"></lucide-icon>
+            </i></li>
+          <li><i>
+              <lucide-icon name="star" class="starfull"></lucide-icon>
+            </i></li>
+          <li><i>
+              <lucide-icon name="star" class="starfull"></lucide-icon>
+            </i></li>
+          <li><i>
+              <lucide-icon name="star" class="starfull"></lucide-icon>
+            </i></li>
+        </ul>
+      </div>
+    </div> -->
+  <!-- </div> -->
+
 </div>
