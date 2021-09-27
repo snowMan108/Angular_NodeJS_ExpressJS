@@ -26,7 +26,7 @@ module.exports.createCatego = async(req, res) => {
 module.exports.getAllCategos = async(req, res) => {
     try {
 
-        var categories = await db.sequelize.query("SELECT b1.* FROM bar_categos b1 RIGHT JOIN bar_catego_ins b2 ON b1.id = b2.id_catego AND b2.id IS NOT NULL LIMIT " + req.params.limit, { type: QueryTypes.SELECT });
+        var categories = await db.sequelize.query("SELECT b1.* FROM bar_categos b1 RIGHT JOIN bar_catego_ins b2 ON b1.id = b2.id_catego AND b2.id IS NOT NULL LIMIT " + req.params.limit + " ORDER BY b1.id", { type: QueryTypes.SELECT });
 
         res.json(categories);
     } catch (error) {
