@@ -1,7 +1,8 @@
-const { op } = require('sequelize');
+const { QueryTypes } = require('sequelize');
 const Bar = require('../models').bar;
 const BarCatego = require('../models').bar_catego_in;
 const { generateId } = require('../utils/generateIds');
+const db = require('../models/index');
 
 module.exports.createBar = async(req, res) => {
     try {
@@ -40,7 +41,8 @@ module.exports.createBar = async(req, res) => {
 }
 module.exports.getBars = async(req, res) => {
     try {
-
+        var g_bars = await db.sequelize.query('SELECT b.*, bc.nom as catego, bc.id as id_catego FROM bars b, bar_categos bc, bar_catego_ins bci WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + req.params.search + '%" AND b.city LIKE "%' + req.params.city + '%" AND bc.nom LIKE "%' + req.params.catego + '%"', { type: QueryTypes.SELECT });
+        res.json(g_bars);
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');
