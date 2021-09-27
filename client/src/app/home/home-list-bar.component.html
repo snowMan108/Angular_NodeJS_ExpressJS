@@ -1,13 +1,16 @@
 
 <div  class="restaurant-card">
-  <div class="card-header" style="height: 155px!important;">
+  <div class="card-header" style="height: 155px!important; background: #000 url({{bar.foto}}) center no-repeat;"
+  >
     <div class="favorite-btn">
       <i><lucide-icon name="clipboard-list" class="clippuj10"></lucide-icon></i>
     </div>
-  </div>
- <div class="card-body">
+  </div><div class="card-body">
    <h1><a href="#">{{bar.nom}}</a></h1>
-   <p>{{bar.direcc}}</p>
+   <div style="display: -webkit-inline-flex;   padding-bottom: 12px;   padding-top: 4px;">
+     <button *ngFor="let cat of bar.catego" class="bt-cat">{{cat}}</button>
+   </div>
+   <p><lucide-angular name="map-pin"></lucide-angular>  {{bar.direcc}}</p>
    <p>{{bar.descr}}</p>
    <p>{{bar.horari}}</p>
    <div class="rating">

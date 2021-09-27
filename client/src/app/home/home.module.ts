@@ -10,7 +10,8 @@ import {
   QrCode,
   Search,
   Tag,
-  Map
+  Map,
+  MapPin
 } from 'lucide-angular'
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {
       QrCode,
       Search,
       Tag,
-      Map
+      Map,
+      MapPin
     })
   ]
 })
