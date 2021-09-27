@@ -37,13 +37,17 @@ body{
 }
 
 /* // RESTAURANT CARD LISTING ITEM */
-
-.restaurant-card{
-  background: #fff;
-  width: 320px;
+.featured-listings > home-list-bar {
+  /* width: ; */
   margin: 2%;
   flex-basis: 29%;
-  height: 300px;
+}
+.restaurant-card{
+  background: #fff;
+  /* width: 320px; */
+  margin: 2%;
+  flex-basis: 29%;
+  /* height: 400px; */
   border-radius: 10px;
   text-align: center;
   -webkit-box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
@@ -53,7 +57,7 @@ body{
 }
 
 .card-header{
-  height: 50%;
+  /* height: 50%; */
   background: #000 url(http://res.cloudinary.com/jenelle-miller/image/upload/v1518632582/tupelo-cafe_a7buc9.png) center no-repeat;
   background-size: cover;
   position: relative;
@@ -84,6 +88,7 @@ body{
 
 .rating ul{
   padding: 10px;
+  margin-bottom: 0px;
 }
 .rating li{
   display: inline;
