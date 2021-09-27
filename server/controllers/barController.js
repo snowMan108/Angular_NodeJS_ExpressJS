@@ -15,6 +15,7 @@ module.exports.createBar = async(req, res) => {
             coords: req.body.coords,
             horari: req.body.horari,
             owner: req.body.owner,
+            foto: req.body.foto,
             createdAt: new Date(),
             updatedAt: new Date(),
         });
@@ -73,6 +74,7 @@ module.exports.getBars = async(req, res) => {
                 coords: g_bars[0].coords,
                 horari: g_bars[0].horari,
                 owner: g_bars[0].owner,
+                foto: g_bars[0].foto,
                 catego: [g_bars[0].catego]
             });
             for (let i = 1; i < g_bars.length; i++) {
@@ -90,6 +92,7 @@ module.exports.getBars = async(req, res) => {
                         coords: g_bars[i].coords,
                         horari: g_bars[i].horari,
                         owner: g_bars[i].owner,
+                        foto: g_bars[i].foto,
                         catego: [g_bars[i].catego]
                     });
                 }
@@ -112,7 +115,29 @@ module.exports.updateBarInfo = async(req, res) => {
 }
 module.exports.deleteBar = async(req, res) => {
     try {
+        var findBar = await Bar.findAll({
+            where: {
+                id: req.params.id_bar
+            }
+        });
 
+        if (!findBar) {
+            res.status(404).json({ msg: 'No existe el Bar' });
+        }
+
+        await Bar.destroy({
+            where: {
+                id: req.params.id_bar
+            }
+        });
+
+        await BarCatego.destroy({
+            where: {
+                id_bar: req.params.id_bar
+            }
+        });
+
+        res.json("Se ha borrado correctamente el bar");
     } catch (error) {
         console.log(error);
         res.status(500).send('ERROR 500');

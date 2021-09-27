@@ -31,7 +31,8 @@ module.exports = (sequelize, DataTypes) => {
         city: DataTypes.STRING,
         coords: DataTypes.STRING,
         horari: DataTypes.STRING,
-        owner: DataTypes.STRING
+        owner: DataTypes.STRING,
+        foto: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'bar',
