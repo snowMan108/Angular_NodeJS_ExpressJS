@@ -2,9 +2,16 @@ const BarValoration = require("../models/barValorationModel");
 
 module.exports.create_valoration = async(req, res) => {
     try {
+        var new_rate = req.body.rate;
+        if (new_rate > 5) {
+            new_rate = 5;
+        } else if (new_rate < 1) {
+            new_rate = 1;
+        }
+
         var valoration = {
             id_user: req.body.id_user,
-            rate: req.body.rate,
+            rate: new_rate,
             descr: req.body.descr,
             date: new Date()
         }
