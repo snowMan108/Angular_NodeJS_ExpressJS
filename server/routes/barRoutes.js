@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const barController = require('../controllers/barController.js');
 const barCategoController = require('../controllers/barCategoController.js');
+const barValorationController = require('../controllers/barValorationController');
 
 //api/bar
 router.post('/', barController.createBar);
@@ -14,5 +15,8 @@ router.post('/categories/', barCategoController.createCatego);
 router.get('/categories/:limit', barCategoController.getAllCategos);
 router.put('/categories/:id_catego', barCategoController.updateCatego);
 router.delete('/categories/:id_catego', barCategoController.deleteCatego);
+
+//valoration routes
+router.post('/valorations/', barValorationController.create_valoration);
 
 module.exports = router;

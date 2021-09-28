@@ -3,6 +3,7 @@ const Bar = require('../models').bar;
 const BarCatego = require('../models').bar_catego_in;
 const { generateId } = require('../utils/generateIds');
 const db = require('../models/index');
+const BarValoration = require("../models/barValorationModel");
 
 module.exports.createBar = async(req, res) => {
     try {
@@ -33,6 +34,12 @@ module.exports.createBar = async(req, res) => {
                 id_bar: c_bar.id,
             });
         }
+
+        let bar_valoration = new BarValoration;
+        bar_valoration.id_bar = c_bar.id;
+        bar_valoration.valorations = new Array();
+
+        await bar_valoration.save();
 
         res.json(c_bar);
     } catch (error) {
