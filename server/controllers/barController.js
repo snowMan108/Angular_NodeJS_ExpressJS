@@ -78,12 +78,12 @@ module.exports.getBars = async(req, res) => {
                 { "$match": { "id_bar": g_bars[0].id } },
                 { "$unwind": "$valorations" },
                 {
-                    "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" } }
+                    "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
                 }
             ]);
 
             if (valoration_avg.length == 0) {
-                valoration_avg[0] = { media: 0 };;
+                valoration_avg[0] = { media: 0, num: 0 };;
             }
 
             var bars = new Array({
@@ -98,7 +98,8 @@ module.exports.getBars = async(req, res) => {
                 owner: g_bars[0].owner,
                 foto: g_bars[0].foto,
                 catego: [g_bars[0].catego],
-                valoration: Math.round(valoration_avg[0].media)
+                valoration: Math.round(valoration_avg[0].media),
+                valoration_num: valoration_avg[0].num
             });
             for (let i = 1; i < g_bars.length; i++) {
                 if (bars[bars.length - 1].id == g_bars[i].id) {
@@ -108,14 +109,14 @@ module.exports.getBars = async(req, res) => {
                         { "$match": { "id_bar": g_bars[i].id } },
                         { "$unwind": "$valorations" },
                         {
-                            "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" } }
+                            "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
                         }
                     ]);
 
                     console.log(valoration_avg);
 
                     if (valoration_avg.length == 0) {
-                        valoration_avg[0] = { media: 0 };
+                        valoration_avg[0] = { media: 0, num: 0 };
                     }
 
                     bars.push({
@@ -130,7 +131,8 @@ module.exports.getBars = async(req, res) => {
                         owner: g_bars[i].owner,
                         foto: g_bars[i].foto,
                         catego: [g_bars[i].catego],
-                        valoration: Math.round(valoration_avg[0].media)
+                        valoration: Math.round(valoration_avg[0].media),
+                        valoration_num: valoration_avg[0].num
                     });
                 }
             }
