@@ -82,6 +82,10 @@ module.exports.getBars = async(req, res) => {
                 }
             ]);
 
+            if (valoration_avg.length == 0) {
+                valoration_avg[0] = { media: 0 };;
+            }
+
             var bars = new Array({
                 id: g_bars[0].id,
                 nom: g_bars[0].nom,
@@ -107,6 +111,12 @@ module.exports.getBars = async(req, res) => {
                             "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" } }
                         }
                     ]);
+
+                    console.log(valoration_avg);
+
+                    if (valoration_avg.length == 0) {
+                        valoration_avg[0] = { media: 0 };
+                    }
 
                     bars.push({
                         id: g_bars[i].id,
