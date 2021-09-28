@@ -9,11 +9,11 @@ import { Categorie } from '../core/models/categories.model';
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
-    totalBars =  17;
+    totalBars = 18;
     @ViewChild('inputCiutat') inCiu!: ElementRef;
     @ViewChild('inputNom') inNom!: ElementRef;
     @ViewChild('inputCat') inCat!: ElementRef;
-
+    @ViewChild('btLoadMore') btLoadMore!: ElementRef;
 
     arrCatego!: [Categorie];
     constructor(
@@ -39,7 +39,7 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
       // console.log(this.arrBars);
     }
     loadMore() {
-      this.totalBars += 10;
+      this.totalBars += 9;
       this.getBars()
     }
     getBars() {
@@ -59,12 +59,18 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
         var enviarCiu: string = this.inCiu.nativeElement.value
       }
       this.BarService.getBars(enviarCat,enviarNom,enviarCiu,this.totalBars).subscribe((bars) => {
-          if (this.arrBars == undefined){
-            this.arrBars = bars
-          } else {
-          this.arrBars = [...this.arrBars, ...bars]
+        console.log(bars)
+        if (bars != null){
+          if (bars.length < 9) {
+            this.btLoadMore.nativeElement.remove()
           }
-        })
+          if (this.arrBars == undefined){
+              this.arrBars = bars
+            } else {
+              this.arrBars = [...this.arrBars, ...bars]
+          }
+        }
+      })
     }
 
 

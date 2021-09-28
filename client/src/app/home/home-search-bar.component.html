@@ -53,5 +53,5 @@
 
 <div style="justify-content: space-evenly;" class="featured-listings">
 <home-list-bar *ngFor="let item of arrBars" [bar]="item" ></home-list-bar>
-<p (click)="loadMore()" style="padding: 8px; color: gray; border: gray 2px solid; cursor: pointer;">Load More</p>
+<p (click)="loadMore()" #btLoadMore id="loadMore" style="padding: 8px; color: gray; border: gray 2px solid; cursor: pointer;">Load More</p>
 </div>
