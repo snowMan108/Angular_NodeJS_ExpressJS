@@ -72,8 +72,16 @@ module.exports.getBars = async(req, res) => {
 
         var g_bars = await db.sequelize.query('SELECT b.*, bc.nom as catego FROM bars b, bar_categos bc, bar_catego_ins bci WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ORDER BY b.id LIMIT ' + offset + ', ' + limit, { type: QueryTypes.SELECT });
 
-
         if (g_bars.length > 0) {
+
+            var valoration_avg = await BarValoration.aggregate([
+                { "$match": { "id_bar": g_bars[0].id } },
+                { "$unwind": "$valorations" },
+                {
+                    "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" } }
+                }
+            ]);
+
             var bars = new Array({
                 id: g_bars[0].id,
                 nom: g_bars[0].nom,
@@ -85,12 +93,20 @@ module.exports.getBars = async(req, res) => {
                 horari: g_bars[0].horari,
                 owner: g_bars[0].owner,
                 foto: g_bars[0].foto,
-                catego: [g_bars[0].catego]
+                catego: [g_bars[0].catego],
+                valoration: Math.round(valoration_avg[0].media)
             });
             for (let i = 1; i < g_bars.length; i++) {
                 if (bars[bars.length - 1].id == g_bars[i].id) {
                     bars[bars.length - 1].catego.push(g_bars[i].catego);
                 } else {
+                    valoration_avg = await BarValoration.aggregate([
+                        { "$match": { "id_bar": g_bars[i].id } },
+                        { "$unwind": "$valorations" },
+                        {
+                            "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" } }
+                        }
+                    ]);
 
                     bars.push({
                         id: g_bars[i].id,
@@ -103,7 +119,8 @@ module.exports.getBars = async(req, res) => {
                         horari: g_bars[i].horari,
                         owner: g_bars[i].owner,
                         foto: g_bars[i].foto,
-                        catego: [g_bars[i].catego]
+                        catego: [g_bars[i].catego],
+                        valoration: Math.round(valoration_avg[0].media)
                     });
                 }
             }
