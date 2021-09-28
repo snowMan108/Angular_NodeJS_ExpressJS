@@ -58,9 +58,21 @@ body{
 
 .card-header{
   /* height: 50%; */
-  background: #000 url(http://res.cloudinary.com/jenelle-miller/image/upload/v1518632582/tupelo-cafe_a7buc9.png) center no-repeat;
-  background-size: cover;
-  position: relative;
+  /* background: #000 url(http://res.cloudinary.com/jenelle-miller/image/upload/v1518632582/tupelo-cafe_a7buc9.png) center no-repeat; */
+  background-size: cover!important;
+  position: relative!important;
+}
+.bt-cat {
+  border: 0px;
+    background-color: #F22F59;
+    padding: 5px;
+    border-radius: 8px;
+    color: aliceblue;
+    cursor: pointer;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family: system-ui;
+    margin:6px;
 }
 
 .favorite-btn{
