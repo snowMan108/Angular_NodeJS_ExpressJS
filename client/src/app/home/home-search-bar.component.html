@@ -1,15 +1,11 @@
-<div class=""
-  style="background-image: url('https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg'); background-position: 100%; background-size: 100%;">
+<div class="" style="background-image: url('https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg'); background-position: 100%; background-size: 100%;">
   <div class="row">
-
     <div class="col mx-auto">
-      <!-- <h1 style="text-align: center; color: orange; font-weight: bold; margin-top: 30px;"  class="display-1">APPBAR</h1> -->
       <div style="text-align: center; margin-top: 5%;">
         <img src="https://i.ibb.co/6wtNQhn/logo-large.png" alt="logo-large" border="0">
       </div>
       <div style="padding: 5%;" class="rounded shadow">
         <form action="" class="form-group row">
-          <!-- <div class="p-1 bg-light rounded rounded-pill shadow-sm col-md-4"> -->
           <div class="p-1 bg-light rounded rounded-pill offset-md-1 shadow-sm mb-4 col-md-2">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -57,37 +53,5 @@
 
 <div style="justify-content: space-evenly;" class="featured-listings">
 <home-list-bar *ngFor="let item of arrBars" [bar]="item" ></home-list-bar>
-  <!-- <div class="restaurant-card" *ngFor="let item of arrBars">
-    <div class="card-header">
-      <div class="favorite-btn">
-        <i class="fas fa-heart"></i>
-      </div>
-    </div>
-    <div class="card-body">
-      <h1><a href="#">{{item.nom}}</a></h1>
-      <p>{{item.direcc}}</p>
-      <p>{{item.descr}}</p>
-      <p>{{item.horari}}</p>
-      <div class="rating">
-        <ul>
-          <li><i>
-              <lucide-icon name="star" class="starfull"></lucide-icon>
-            </i></li>
-          <li><i>
-              <lucide-icon name="star" class="starfull"></lucide-icon>
-            </i></li>
-          <li><i>
-              <lucide-icon name="star" class="starfull"></lucide-icon>
-            </i></li>
-          <li><i>
-              <lucide-icon name="star" class="starfull"></lucide-icon>
-            </i></li>
-          <li><i>
-              <lucide-icon name="star" class="starfull"></lucide-icon>
-            </i></li>
-        </ul>
-      </div>
-    </div> -->
-  <!-- </div> -->
-
+<p (click)="loadMore()" style="padding: 8px; color: gray; border: gray 2px solid; cursor: pointer;">Load More</p>
 </div>

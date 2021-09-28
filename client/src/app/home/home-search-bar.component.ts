@@ -9,6 +9,7 @@ import { Categorie } from '../core/models/categories.model';
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
+    totalBars =  10;
     @ViewChild('inputCiutat') inCiu!: ElementRef;
     @ViewChild('inputNom') inNom!: ElementRef;
     @ViewChild('inputCat') inCat!: ElementRef;
@@ -17,7 +18,7 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrCatego!: [Categorie];
     constructor(
       private cd: ChangeDetectorRef,
-
+      // private totalBars: 10,
       private router: Router,
       private BarService: BarService,
     ) {}
@@ -37,6 +38,10 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
       // this.getall()
       // console.log(this.arrBars);
     }
+    loadMore() {
+      this.totalBars += 10;
+      this.getBars()
+    }
     getBars() {
       if (this.inCat.nativeElement.value == '') {
         var enviarCat = "no-param"
@@ -53,7 +58,7 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
       } else {
         var enviarCiu: string = this.inCiu.nativeElement.value
       }
-      this.BarService.getBars(enviarCat,enviarNom,enviarCiu).subscribe((bars) => {
+      this.BarService.getBars(enviarCat,enviarNom,enviarCiu,this.totalBars).subscribe((bars) => {
           this.arrBars = bars
           const seen = new Set();
           this.arrBars = bars.filter((el: { id: string; }) => {
