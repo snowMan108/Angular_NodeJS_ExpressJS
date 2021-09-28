@@ -14,7 +14,7 @@
                   </i></button>
               </div>
               <input type="search" style="border-radius: 24px;" list="datalistOptions" #inputCat id="inputCat"
-                placeholder="Categories" aria-describedby="button-addon2" (keyup)="getBars()"
+                placeholder="Categories" aria-describedby="button-addon2" (keyup)="getBars(false)"
                 class="form-control border-0 bg-light">
               <datalist id="datalistOptions">
                 <option *ngFor="let item of arrCatego" value="{{item.nom}}">
@@ -29,7 +29,7 @@
                     <lucide-icon name="search"></lucide-icon>
                   </i></button>
               </div>
-              <input type="search" id="inputNom" #inputNom (keyup)="getBars()" style="border-radius: 24px;"
+              <input type="search" id="inputNom" #inputNom (keyup)="getBars(false)" style="border-radius: 24px;"
                 placeholder="What're you searching for?" aria-describedby="button-addon2"
                 class="form-control border-0 bg-light">
             </div>
@@ -41,7 +41,7 @@
                     <lucide-icon name="map"></lucide-icon>
                   </i></button>
               </div>
-              <input (keyup)="getBars()" id="inputCiutat" #inputCiutat type="search" style="border-radius: 24px;"
+              <input (keyup)="getBars(false)" id="inputCiutat" #inputCiutat type="search" style="border-radius: 24px;"
                 placeholder="Location" aria-describedby="button-addon2" class="form-control border-0 bg-light">
             </div>
           </div>
@@ -52,6 +52,6 @@
 </div>
 
 <div style="justify-content: space-evenly;" class="featured-listings">
-<home-list-bar *ngFor="let item of arrBars" [bar]="item" ></home-list-bar>
+<home-list-bar *ngFor="let item of arrBars" [bar]="item" (outCat)="resSearch($event)" ></home-list-bar>
 <p (click)="loadMore()" #btLoadMore id="loadMore" style="padding: 8px; color: gray; border: gray 2px solid; cursor: pointer;">Load More</p>
 </div>

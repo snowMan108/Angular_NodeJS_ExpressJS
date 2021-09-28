@@ -9,7 +9,7 @@ import { Categorie } from '../core/models/categories.model';
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
-    totalBars = 18;
+    totalBars = 9;
     @ViewChild('inputCiutat') inCiu!: ElementRef;
     @ViewChild('inputNom') inNom!: ElementRef;
     @ViewChild('inputCat') inCat!: ElementRef;
@@ -30,19 +30,27 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
         this.arrCatego = categos
         console.log(this.arrCatego)
       })
-      this.getBars()
+      this.getBars(false)
 
     }
     ngOnInit() {
-      console.log("dins del component homesearch");
+      // console.log("dins del component esearch");
       // this.getall()
       // console.log(this.arrBars);
     }
     loadMore() {
       this.totalBars += 9;
-      this.getBars()
+      this.getBars(true)
     }
-    getBars() {
+    resSearch(algo: String){
+      console.log(algo)
+      this.inCat.nativeElement.value=algo
+      // FALTA FICAR EL ONCHANGE DEL CAT I FER QUE FUNCIONE
+      this.inNom.nativeElement.value=""
+      this.inCiu.nativeElement.value=""
+
+    }
+    getBars(keepalive: boolean) {
       if (this.inCat.nativeElement.value == '') {
         var enviarCat = "no-param"
       } else {
@@ -67,7 +75,11 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
           if (this.arrBars == undefined){
               this.arrBars = bars
             } else {
-              this.arrBars = [...this.arrBars, ...bars]
+              if (keepalive) {
+                this.arrBars = [...this.arrBars, ...bars]
+              } else {
+                this.arrBars = bars;
+              }
           }
         }
       })
