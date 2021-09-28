@@ -9,7 +9,7 @@ import { Categorie } from '../core/models/categories.model';
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
-    totalBars =  10;
+    totalBars =  17;
     @ViewChild('inputCiutat') inCiu!: ElementRef;
     @ViewChild('inputNom') inNom!: ElementRef;
     @ViewChild('inputCat') inCat!: ElementRef;
@@ -59,14 +59,11 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
         var enviarCiu: string = this.inCiu.nativeElement.value
       }
       this.BarService.getBars(enviarCat,enviarNom,enviarCiu,this.totalBars).subscribe((bars) => {
-          this.arrBars = bars
-          const seen = new Set();
-          this.arrBars = bars.filter((el: { id: string; }) => {
-            const duplicate = seen.has(el.id);
-            seen.add(el.id);
-            return !duplicate;
-          });
-          console.log(this.arrBars);
+          if (this.arrBars == undefined){
+            this.arrBars = bars
+          } else {
+          this.arrBars = [...this.arrBars, ...bars]
+          }
         })
     }
 
