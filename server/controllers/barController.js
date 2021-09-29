@@ -65,12 +65,24 @@ module.exports.getBars = async(req, res) => {
         }
         if (limit == "no-param") {
             limit = 10;
-            offset = 1;
+            offset = 0;
         } else {
-            offset = limit - 9;
+            offset = limit - 10;
         }
 
-        var g_bars = await db.sequelize.query('SELECT b.*, bc.nom as catego FROM bars b, bar_categos bc, bar_catego_ins bci WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ORDER BY b.id LIMIT ' + offset + ', 10', { type: QueryTypes.SELECT });
+        var g_bars = await db.sequelize.query('SELECT k.*, k1.catego as catego2 ' +
+            'FROM ( ' +
+            'SELECT b.*, bc.nom as catego ' +
+            'FROM bars b, bar_categos bc, bar_catego_ins bci ' +
+            'WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ' +
+            ') k LEFT JOIN ( ' +
+            'SELECT b.*, bc.nom as catego ' +
+            'FROM bars b, bar_categos bc, bar_catego_ins bci ' +
+            'WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ' +
+            ') k1 ' +
+            'ON k.id = k1.id AND k.catego <> k1.catego ' +
+            'GROUP BY k.id ' +
+            'LIMIT ' + offset + ', 10', { type: QueryTypes.SELECT });
 
         if (g_bars.length > 0) {
 
@@ -97,44 +109,39 @@ module.exports.getBars = async(req, res) => {
                 horari: g_bars[0].horari,
                 owner: g_bars[0].owner,
                 foto: g_bars[0].foto,
-                catego: [g_bars[0].catego],
+                catego: [g_bars[0].catego, g_bars[0].catego2],
                 valoration: Math.round(valoration_avg[0].media),
                 valoration_num: valoration_avg[0].num
             });
             for (let i = 1; i < g_bars.length; i++) {
-                if (bars[bars.length - 1].id == g_bars[i].id) {
-                    bars[bars.length - 1].catego.push(g_bars[i].catego);
-                } else {
-                    valoration_avg = await BarValoration.aggregate([
-                        { "$match": { "id_bar": g_bars[i].id } },
-                        { "$unwind": "$valorations" },
-                        {
-                            "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
-                        }
-                    ]);
 
-                    console.log(valoration_avg);
-
-                    if (valoration_avg.length == 0) {
-                        valoration_avg[0] = { media: 0, num: 0 };
+                valoration_avg = await BarValoration.aggregate([
+                    { "$match": { "id_bar": g_bars[i].id } },
+                    { "$unwind": "$valorations" },
+                    {
+                        "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
                     }
+                ]);
 
-                    bars.push({
-                        id: g_bars[i].id,
-                        nom: g_bars[i].nom,
-                        slug: g_bars[i].slug,
-                        descr: g_bars[i].descr,
-                        direcc: g_bars[i].direcc,
-                        city: g_bars[i].city,
-                        coords: g_bars[i].coords,
-                        horari: g_bars[i].horari,
-                        owner: g_bars[i].owner,
-                        foto: g_bars[i].foto,
-                        catego: [g_bars[i].catego],
-                        valoration: Math.round(valoration_avg[0].media),
-                        valoration_num: valoration_avg[0].num
-                    });
+                if (valoration_avg.length == 0) {
+                    valoration_avg[0] = { media: 0, num: 0 };
                 }
+
+                bars.push({
+                    id: g_bars[i].id,
+                    nom: g_bars[i].nom,
+                    slug: g_bars[i].slug,
+                    descr: g_bars[i].descr,
+                    direcc: g_bars[i].direcc,
+                    city: g_bars[i].city,
+                    coords: g_bars[i].coords,
+                    horari: g_bars[i].horari,
+                    owner: g_bars[i].owner,
+                    foto: g_bars[i].foto,
+                    catego: [g_bars[i].catego, g_bars[i].catego2],
+                    valoration: Math.round(valoration_avg[0].media),
+                    valoration_num: valoration_avg[0].num
+                });
             }
         }
 
