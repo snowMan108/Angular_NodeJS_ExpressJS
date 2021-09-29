@@ -67,7 +67,7 @@ module.exports.getBars = async(req, res) => {
             limit = 10;
             offset = 0;
         } else {
-            offset = limit - 10;
+            offset = limit - 9;
         }
 
         var g_bars = await db.sequelize.query('SELECT k.*, k1.catego as catego2 ' +
@@ -78,11 +78,11 @@ module.exports.getBars = async(req, res) => {
             ') k LEFT JOIN ( ' +
             'SELECT b.*, bc.nom as catego ' +
             'FROM bars b, bar_categos bc, bar_catego_ins bci ' +
-            'WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ' +
+            'WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" ' +
             ') k1 ' +
             'ON k.id = k1.id AND k.catego <> k1.catego ' +
             'GROUP BY k.id ' +
-            'LIMIT ' + offset + ', 10', { type: QueryTypes.SELECT });
+            'LIMIT ' + offset + ', 9', { type: QueryTypes.SELECT });
 
         if (g_bars.length > 0) {
 
