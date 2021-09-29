@@ -18,8 +18,8 @@ export class BarService {
           //   console.log(data);
           //   data.bars}));
   }
-  getBars(cat: string,nom: string,ciutat: string): Observable<any> {
-    return this.apiService.get('bar/'+cat+'/'+nom+'/'+ciutat+'/10')
+  getBars(cat: string,nom: string,ciutat: string, totalBars: number): Observable<any> {
+    return this.apiService.get('bar/'+cat+'/'+nom+'/'+ciutat+'/'+totalBars)
   }
   getAllCategories(): Observable<[Categorie]> {
     return this.apiService.get('bar/categories/100');

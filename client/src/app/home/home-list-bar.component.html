@@ -1,25 +1,22 @@
 
 <div  class="restaurant-card">
-  <div class="card-header" style="height: 155px!important; background: #000 url({{bar.foto}}) center no-repeat;"
-  >
+  <div class="card-header" style="height: 155px!important; background: #000 url({{bar.foto}}) center no-repeat;">
     <div class="favorite-btn">
       <i><lucide-icon name="clipboard-list" class="clippuj10"></lucide-icon></i>
     </div>
   </div><div class="card-body">
    <h1><a href="#">{{bar.nom}}</a></h1>
    <div style="display: -webkit-inline-flex;   padding-bottom: 12px;   padding-top: 4px;">
-     <button *ngFor="let cat of bar.catego" class="bt-cat">{{cat}}</button>
+     <button *ngFor="let cat of bar.catego" (click)="outputCat(cat)"  class="bt-cat">{{cat}}</button>
    </div>
    <p><lucide-angular name="map-pin"></lucide-angular>  {{bar.direcc}}</p>
    <p>{{bar.descr}}</p>
    <p>{{bar.horari}}</p>
    <div class="rating">
      <ul>
-       <li><i><lucide-icon name="star" class="starfull"></lucide-icon></i></li>
-       <li><i><lucide-icon name="star" class="starfull"></lucide-icon></i></li>
-       <li><i><lucide-icon name="star" class="starfull"></lucide-icon></i></li>
-       <li><i><lucide-icon name="star" class="starfull"></lucide-icon></i></li>
-       <li><i><lucide-icon name="star" class="starfull"></lucide-icon></i></li>
+       <li *ngFor="let number of stars"><i><lucide-icon name="star" class="starfull"></lucide-icon></i></li>
+       <li *ngFor="let number of noStars"><i><lucide-icon name="star"></lucide-icon></i></li>
+       <li>{{bar.valoration_num}}</li>
      </ul>
    </div>
  </div>

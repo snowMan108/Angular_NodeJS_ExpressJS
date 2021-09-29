@@ -9,15 +9,16 @@ import { Categorie } from '../core/models/categories.model';
 })
 export class HomeSearchComponent implements OnInit, AfterViewInit {
     arrBars!: any[];
+    totalBars = 9;
     @ViewChild('inputCiutat') inCiu!: ElementRef;
     @ViewChild('inputNom') inNom!: ElementRef;
     @ViewChild('inputCat') inCat!: ElementRef;
-
+    @ViewChild('btLoadMore') btLoadMore!: ElementRef;
 
     arrCatego!: [Categorie];
     constructor(
       private cd: ChangeDetectorRef,
-
+      // private totalBars: 10,
       private router: Router,
       private BarService: BarService,
     ) {}
@@ -29,15 +30,27 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
         this.arrCatego = categos
         console.log(this.arrCatego)
       })
-      this.getBars()
+      this.getBars(false)
 
     }
     ngOnInit() {
-      console.log("dins del component homesearch");
+      // console.log("dins del component esearch");
       // this.getall()
       // console.log(this.arrBars);
     }
-    getBars() {
+    loadMore() {
+      this.totalBars += 9;
+      this.getBars(true)
+    }
+    resSearch(algo: String){
+      console.log(algo)
+      this.inCat.nativeElement.value=algo
+      // FALTA FICAR EL ONCHANGE DEL CAT I FER QUE FUNCIONE
+      this.inNom.nativeElement.value=""
+      this.inCiu.nativeElement.value=""
+
+    }
+    getBars(keepalive: boolean) {
       if (this.inCat.nativeElement.value == '') {
         var enviarCat = "no-param"
       } else {
@@ -53,16 +66,23 @@ export class HomeSearchComponent implements OnInit, AfterViewInit {
       } else {
         var enviarCiu: string = this.inCiu.nativeElement.value
       }
-      this.BarService.getBars(enviarCat,enviarNom,enviarCiu).subscribe((bars) => {
-          this.arrBars = bars
-          const seen = new Set();
-          this.arrBars = bars.filter((el: { id: string; }) => {
-            const duplicate = seen.has(el.id);
-            seen.add(el.id);
-            return !duplicate;
-          });
-          console.log(this.arrBars);
-        })
+      this.BarService.getBars(enviarCat,enviarNom,enviarCiu,this.totalBars).subscribe((bars) => {
+        console.log(bars)
+        if (bars != null){
+          if (bars.length < 9) {
+            this.btLoadMore.nativeElement.remove()
+          }
+          if (this.arrBars == undefined){
+              this.arrBars = bars
+            } else {
+              if (keepalive) {
+                this.arrBars = [...this.arrBars, ...bars]
+              } else {
+                this.arrBars = bars;
+              }
+          }
+        }
+      })
     }
 
 
