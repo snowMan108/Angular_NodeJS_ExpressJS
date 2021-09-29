@@ -87,15 +87,25 @@ module.exports.getBars = async(req, res) => {
         if (g_bars.length > 0) {
 
             var valoration_avg = await BarValoration.aggregate([
-                { "$match": { "id_bar": g_bars[0].id } },
                 { "$unwind": "$valorations" },
                 {
-                    "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
+                    "$group": { "_id": "$id_bar", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
                 }
             ]);
 
-            if (valoration_avg.length == 0) {
-                valoration_avg[0] = { media: 0, num: 0 };;
+            const index_valorations = valoration_avg.map((bar) => {
+                return bar._id;
+            });
+
+            var this_index = index_valorations.indexOf(g_bars[0].id);
+            var this_valoration;
+            var this_valoration_num;
+            if (this_index > -1) {
+                this_valoration = Math.round(valoration_avg[this_index].media);
+                this_valoration_num = valoration_avg[this_index].num;
+            } else {
+                this_valoration = 0;
+                this_valoration_num = 0;
             }
 
             var bars = new Array({
@@ -110,21 +120,19 @@ module.exports.getBars = async(req, res) => {
                 owner: g_bars[0].owner,
                 foto: g_bars[0].foto,
                 catego: [g_bars[0].catego, g_bars[0].catego2],
-                valoration: Math.round(valoration_avg[0].media),
-                valoration_num: valoration_avg[0].num
+                valoration: this_valoration,
+                valoration_num: this_valoration_num
             });
             for (let i = 1; i < g_bars.length; i++) {
 
-                valoration_avg = await BarValoration.aggregate([
-                    { "$match": { "id_bar": g_bars[i].id } },
-                    { "$unwind": "$valorations" },
-                    {
-                        "$group": { "_id": "$_id", media: { "$avg": "$valorations.rate" }, num: { "$sum": 1 } }
-                    }
-                ]);
+                this_index = index_valorations.indexOf(g_bars[i].id);
 
-                if (valoration_avg.length == 0) {
-                    valoration_avg[0] = { media: 0, num: 0 };
+                if (this_index > -1) {
+                    this_valoration = Math.round(valoration_avg[this_index].media);
+                    this_valoration_num = valoration_avg[this_index].num;
+                } else {
+                    this_valoration = 0;
+                    this_valoration_num = 0;
                 }
 
                 bars.push({
@@ -139,8 +147,8 @@ module.exports.getBars = async(req, res) => {
                     owner: g_bars[i].owner,
                     foto: g_bars[i].foto,
                     catego: [g_bars[i].catego, g_bars[i].catego2],
-                    valoration: Math.round(valoration_avg[0].media),
-                    valoration_num: valoration_avg[0].num
+                    valoration: this_valoration,
+                    valoration_num: this_valoration_num
                 });
             }
         }
