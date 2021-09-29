@@ -70,7 +70,7 @@ module.exports.getBars = async(req, res) => {
             offset = limit - 9;
         }
 
-        var g_bars = await db.sequelize.query('SELECT b.*, bc.nom as catego FROM bars b, bar_categos bc, bar_catego_ins bci WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ORDER BY b.id LIMIT ' + offset + ', ' + limit, { type: QueryTypes.SELECT });
+        var g_bars = await db.sequelize.query('SELECT b.*, bc.nom as catego FROM bars b, bar_categos bc, bar_catego_ins bci WHERE b.id = bci.id_bar AND bci.id_catego = bc.id AND b.nom LIKE "%' + search + '%" AND b.city LIKE "%' + city + '%" AND bc.nom LIKE "%' + catego + '%" ORDER BY b.id LIMIT ' + offset + ', 10', { type: QueryTypes.SELECT });
 
         if (g_bars.length > 0) {
 
