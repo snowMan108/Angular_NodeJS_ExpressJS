@@ -18,5 +18,6 @@ router.delete('/categories/:id_catego', barCategoController.deleteCatego);
 
 //valoration routes
 router.post('/valorations/', barValorationController.create_valoration);
+router.get('/valorations/:id_bar/:limit', barValorationController.getBarValorations);
 
 module.exports = router;

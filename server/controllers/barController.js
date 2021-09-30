@@ -104,7 +104,7 @@ module.exports.getBars = async(req, res) => {
                 this_valoration = Math.round(valoration_avg[this_index].media);
                 this_valoration_num = valoration_avg[this_index].num;
                 this_valoration_order = (valoration_avg[this_index].media - 2) * this_valoration_num;
-                console.log(this_valoration_order);
+
             } else {
                 this_valoration = 0;
                 this_valoration_num = 0;
@@ -135,7 +135,7 @@ module.exports.getBars = async(req, res) => {
                     this_valoration = Math.round(valoration_avg[this_index].media);
                     this_valoration_num = valoration_avg[this_index].num;
                     this_valoration_order = (valoration_avg[this_index].media - 2) * this_valoration_num;
-                    console.log(this_valoration_order);
+
                 } else {
                     this_valoration = 0;
                     this_valoration_num = 0;
