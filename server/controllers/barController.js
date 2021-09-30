@@ -169,6 +169,22 @@ module.exports.getBars = async(req, res) => {
         res.status(500).send('ERROR 500');
     }
 }
+
+module.exports.getBarInfo = async(req, res) => {
+    try {
+        var bar = await Bar.findOne({ slug: req.params.slug_bar });
+
+        if (!bar) {
+            res.status(404).json({ msg: 'No existe el Bar' });
+        }
+
+        res.json(bar);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('ERROR 500');
+    }
+}
+
 module.exports.updateBarInfo = async(req, res) => {
     try {
 

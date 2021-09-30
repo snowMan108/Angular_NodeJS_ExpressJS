@@ -14,8 +14,6 @@ module.exports.createCatego = async(req, res) => {
             updatedAt: new Date(),
         }, { returning: true });
 
-        console.log("Mira esto --- " + c_catego);
-
         res.json(c_catego);
     } catch (error) {
         console.log(error);
