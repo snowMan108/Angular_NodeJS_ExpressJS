@@ -67,7 +67,7 @@ module.exports.getBars = async(req, res) => {
             limit = 10;
             offset = 0;
         } else {
-            offset = limit - 9;
+            offset = limit - 10;
         }
 
         var g_bars = await db.sequelize.query('SELECT k.*, k1.catego as catego2 ' +
@@ -103,9 +103,12 @@ module.exports.getBars = async(req, res) => {
             if (this_index > -1) {
                 this_valoration = Math.round(valoration_avg[this_index].media);
                 this_valoration_num = valoration_avg[this_index].num;
+                this_valoration_order = (valoration_avg[this_index].media - 2) * this_valoration_num;
+                console.log(this_valoration_order);
             } else {
                 this_valoration = 0;
                 this_valoration_num = 0;
+                this_valoration_order = 0;
             }
 
             var bars = new Array({
@@ -121,7 +124,8 @@ module.exports.getBars = async(req, res) => {
                 foto: g_bars[0].foto,
                 catego: [g_bars[0].catego, g_bars[0].catego2],
                 valoration: this_valoration,
-                valoration_num: this_valoration_num
+                valoration_num: this_valoration_num,
+                valoration_order: this_valoration_order
             });
             for (let i = 1; i < g_bars.length; i++) {
 
@@ -130,9 +134,12 @@ module.exports.getBars = async(req, res) => {
                 if (this_index > -1) {
                     this_valoration = Math.round(valoration_avg[this_index].media);
                     this_valoration_num = valoration_avg[this_index].num;
+                    this_valoration_order = (valoration_avg[this_index].media - 2) * this_valoration_num;
+                    console.log(this_valoration_order);
                 } else {
                     this_valoration = 0;
                     this_valoration_num = 0;
+                    this_valoration_order = 0;
                 }
 
                 bars.push({
@@ -148,10 +155,13 @@ module.exports.getBars = async(req, res) => {
                     foto: g_bars[i].foto,
                     catego: [g_bars[i].catego, g_bars[i].catego2],
                     valoration: this_valoration,
-                    valoration_num: this_valoration_num
+                    valoration_num: this_valoration_num,
+                    valoration_order: this_valoration_order
                 });
             }
         }
+
+        bars.sort((a, b) => (a.valoration_order < b.valoration_order) ? 1 : ((b.valoration_order < a.valoration_order) ? -1 : 0));
 
         res.json(bars);
     } catch (error) {
